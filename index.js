@@ -12,6 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+let client = null
+
 // async function reconnect() {
 //     try {
 //       await client.initialize();
@@ -31,38 +33,60 @@ app.get('/', (req,res)=>{
 })
 
 app.post('/enviar-mensaje', async(req,res)=>{
-    const {numero, mensaje} = req.body;
+    const {numero, mensaje} = req.body;   
 
-    const client =  new Client({
-        authStrategy: new LocalAuth({ dataPath: 'session' }),
-        webVersionCache: {
-        type: "remote",
-        remotePath:
-            "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
-        },
-    });
-  
-        client.on('qr', (qr)=>{
-            qrcode.generate(qr, {small:true})
-            console.log('QR RECEIVED', qr)
+    if (!client) {
+        client = new Client({
+            authStrategy: new LocalAuth({ dataPath: 'session' }),
+            webVersionCache: {
+                type: "remote",
+                remotePath: "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+            },
         });
+
+        // Eventos del cliente
+        client.on('qr', (qr) => {
+            qrcode.generate(qr, { small: true });
+            console.log('QR RECEIVED', qr);
+        });
+
+        client.on('ready', () => {
+            console.log('Conectado a WhatsApp');
+        });
+
+        // Inicialización del cliente
+        await client.initialize();
+    }
+
+    // const client =  new Client({
+    //     authStrategy: new LocalAuth({ dataPath: 'session' }),
+    //     webVersionCache: {
+    //     type: "remote",
+    //     remotePath:
+    //         "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+    //     },
+    // });
+
+    
+        // client.on('qr', (qr)=>{
+        //     qrcode.generate(qr, {small:true})
+        //     console.log('QR RECEIVED', qr)
+        // });
 
         // client.on('remote_session_saved', () => {
         //     console.log('remote_session_saved')
         // });
-        client.on('ready', ()=>{
-            console.log('Conectado a wsp');
-        });
+        // client.on('ready', ()=>{
+        //     console.log('Conectado a wsp');
+        // });
         // client.on('message', (message)=>{
         // });
 
 
-    await client.initialize();  
+    // await client.initialize();  
     
     
-//    console.log(numero)
-//    console.log(mensaje)
- 
+   
    try {
         for (const phoneNumber of numero) {
             const formattedNumber = phoneNumber + '@c.us';
