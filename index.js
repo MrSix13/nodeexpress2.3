@@ -260,6 +260,6 @@ app.post('/enviar-mensaje-pdf', async(req,res)=>{
 
 
 app.listen(port,()=>{
-    console.log('app escuchando en puerto' + port)
+    console.log('app escuchando en puerto')
 })
 
