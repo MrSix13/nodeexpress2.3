@@ -21,6 +21,7 @@ app.use(cors());
 
 
 
+
 let client                   = null;
 let isWhatsAppConnection     = false;
 let otherPeticiones          = false;
@@ -230,7 +231,7 @@ app.post('/enviar-mensaje-pdf', async(req,res)=>{
       await conectDB();
   }
 
-  
+
   if(!isWhatsAppConnection){
     await conectDB();
   }
@@ -257,7 +258,7 @@ app.post('/enviar-mensaje-pdf', async(req,res)=>{
 
 
 
-app.listen(port, async ()=>{
+app.listen(port,()=>{
     console.log('app escuchando en puerto' + port)
 })
 
