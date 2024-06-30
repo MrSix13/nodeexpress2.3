@@ -9,6 +9,7 @@ import { MongoStore } from 'wwebjs-mongo';
 
 import router from './routes.js';
 
+
 const { Client, RemoteAuth, MessageMedia } = pkg;
 
 const app = express();
