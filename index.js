@@ -7,7 +7,7 @@ import qrcode from 'qrcode-terminal';
 import mongoose from 'mongoose';
 import { MongoStore } from 'wwebjs-mongo';
 
-import router from './routes.js';
+import router from './src/routes';
 
 
 
