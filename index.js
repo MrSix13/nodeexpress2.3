@@ -230,6 +230,7 @@ app.post('/enviar-mensaje-pdf', async(req,res)=>{
       await conectDB();
   }
 
+  
   if(!isWhatsAppConnection){
     await conectDB();
   }
