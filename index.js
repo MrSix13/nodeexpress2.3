@@ -14,12 +14,12 @@ import router from './src/routes.js';
 const { Client, RemoteAuth, MessageMedia } = pkg;
 
 const app = express();
-dotenv.config();
 
+dotenv.config();
+app.use('/api', router);
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
-app.use('/api', router);
 
 const port       = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGODB_URI;
