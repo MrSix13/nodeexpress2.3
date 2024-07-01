@@ -213,8 +213,8 @@ app.post('/enviar-mensaje-pdf', async (req, res) => {
 });
 
 // Export the express app to be used as a Vercel serverless function
-
-app.listen(port, ()=>{
-  console.log('app escuchando en puerto' + port)
-  // conectDB()
-})
+export default app
+// app.listen(port, ()=>{
+//   console.log('app escuchando en puerto' + port)
+//   // conectDB()
+// })
