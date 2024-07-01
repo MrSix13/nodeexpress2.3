@@ -21,6 +21,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use('/api', router);
 
+const port       = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGODB_URI;
 
 let client = null;
