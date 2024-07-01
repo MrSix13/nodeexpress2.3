@@ -10,6 +10,7 @@ import {mongoose} from 'mongoose';
 import { MongoStore } from 'wwebjs-mongo';
 
 import router from './src/routes.js';
+import e from 'cors';
 
 const app = express();
 
